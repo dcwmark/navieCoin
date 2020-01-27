@@ -2,7 +2,6 @@ const SHA256 = require('crypto-js/sha256');
 
 class Block {
     /**
-     * 
      * @param {number} timestamp 
      * @param {*} data 
      * @param {string} previousHash 
