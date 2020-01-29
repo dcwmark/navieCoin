@@ -36,10 +36,27 @@ class BlockChain {
         newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
     }
+
+    isChainValid() {
+        for(let i = 1; i < this.chain.length; i++) {
+            const currBlock = this.chain[i];
+            const prevBlock = this.chain[i - 1];
+
+            if (currBlock.hash !== currBlock.calculateHash()) {
+                return false;
+            }
+
+            if (currBlock.previousHash !== prevBlock.hash) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 let naiveCoin = new BlockChain();
 naiveCoin.addBlock(new Block("10/12/2020", { amount: 10 }));
 naiveCoin.addBlock(new Block("12/10/2020", { amount: 50 }));
 
-console.log(JSON.stringify(naiveCoin, null, 4));
+console.log(JSON.stringify(naiveCoin, null, 2));
